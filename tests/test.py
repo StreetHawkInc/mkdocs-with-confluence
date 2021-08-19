@@ -49,7 +49,14 @@ def find_parent_name_of_page(name):
 
 def find_page_id(name):
     name_confl = name.replace(" ", "+")
-    url = BASE_URL + "?title=" + name_confl + "&spaceKey=" + SPACE_NAME + "&expand=history"
+    url = (
+        BASE_URL
+        + "?title="
+        + name_confl
+        + "&spaceKey="
+        + SPACE_NAME
+        + "&expand=history"
+    )
     print(f"URL: {url}")
 
     auth = (USERNAME, PASSWORD)
@@ -74,7 +81,12 @@ def add_page(page_name, parent_page_id):
         "title": page_name,
         "space": {"key": SPACE_NAME},
         "ancestors": [{"id": parent_page_id}],
-        "body": {"storage": {"value": "<p>This is a new page</p>", "representation": "storage"}},
+        "body": {
+            "storage": {
+                "value": "<p>This is a new page</p>",
+                "representation": "storage",
+            }
+        },
     }
 
     r = requests.post(url, json=data, headers=headers, auth=auth)
@@ -95,7 +107,12 @@ def update_page(page_name):
         data = {
             "type": "page",
             "space": {"key": SPACE_NAME},
-            "body": {"storage": {"value": "<p>Let the dragons out!</p>", "representation": "storage"}},
+            "body": {
+                "storage": {
+                    "value": "<p>Let the dragons out!</p>",
+                    "representation": "storage",
+                }
+            },
             "version": {"number": page_version},
         }
 
@@ -113,7 +130,14 @@ def update_page(page_name):
 
 def find_page_version(name):
     name_confl = name.replace(" ", "+")
-    url = BASE_URL + "?title=" + name_confl + "&spaceKey=" + SPACE_NAME + "&expand=version"
+    url = (
+        BASE_URL
+        + "?title="
+        + name_confl
+        + "&spaceKey="
+        + SPACE_NAME
+        + "&expand=version"
+    )
 
     print(f"URL: {url}")
 
